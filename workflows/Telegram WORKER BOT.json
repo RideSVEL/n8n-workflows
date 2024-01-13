@@ -1,0 +1,18 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-01-13T11:30:15.902Z",
+  "id": "SrEMgtdSvD573W2Q",
+  "meta": null,
+  "name": "Telegram WORKER BOT",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-01-13T11:30:15.902Z",
+  "versionId": "444010ff-29d9-4be3-8195-5c6ea3908786"
+}
