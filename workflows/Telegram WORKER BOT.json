@@ -5,14 +5,69 @@
   "id": "SrEMgtdSvD573W2Q",
   "meta": null,
   "name": "Telegram WORKER BOT",
-  "nodes": [],
-  "pinData": {},
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "id": "920cdbea-34f7-4942-a516-9c805d6e3cbd",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        800,
+        340
+      ],
+      "webhookId": "e2296f12-75cb-476d-af11-5fcacf6e389d",
+      "credentials": {
+        "telegramApi": {
+          "id": "jlP925DmXfOGYCJD",
+          "name": "Serejka Worker BOT"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 484898004,
+          "message": {
+            "message_id": 3,
+            "from": {
+              "id": 5217553853,
+              "is_bot": false,
+              "first_name": "Sergey",
+              "last_name": "Vasylchenko",
+              "username": "SergeyVasilchenko",
+              "language_code": "en"
+            },
+            "chat": {
+              "id": 5217553853,
+              "first_name": "Sergey",
+              "last_name": "Vasylchenko",
+              "username": "SergeyVasilchenko",
+              "type": "private"
+            },
+            "date": 1705230233,
+            "text": "😅"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-01-13T11:30:15.902Z",
-  "versionId": "444010ff-29d9-4be3-8195-5c6ea3908786"
+  "updatedAt": "2024-01-14T11:06:03.000Z",
+  "versionId": "b8e48ae3-adce-4e18-b164-449cda4c784c"
 }
