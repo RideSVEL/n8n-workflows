@@ -1,0 +1,204 @@
+{
+  "active": false,
+  "connections": {
+    "Every 30 secs": {
+      "main": [
+        [
+          {
+            "node": "Get all tasks with specific label",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If date exists": {
+      "main": [
+        [
+          {
+            "node": "Create all-day event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace label on task": {
+      "main": [
+        [
+          {
+            "node": "If date exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add to Notion database": {
+      "main": [
+        [
+          {
+            "node": "Replace label on task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get all tasks with specific label": {
+      "main": [
+        [
+          {
+            "node": "Add to Notion database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-01-16T17:01:25.484Z",
+  "id": "5WHSEhqPDbcjwpdi",
+  "meta": null,
+  "name": "Sync tasks automatically between Notion to Todoist",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "update",
+        "taskId": "={{ $json[\"property_todoist_id\"] }}",
+        "updateFields": {
+          "labels": [
+            2161562984
+          ]
+        }
+      },
+      "id": "5832bfca-8318-4004-b09c-5e02da247e0b",
+      "name": "Replace label on task",
+      "type": "n8n-nodes-base.todoist",
+      "position": [
+        980,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "title": "={{ $json[\"content\"] }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Todoist ID|number",
+              "numberValue": "={{ parseInt($json.id) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "805fabb3-1c11-4c15-a33b-0cda5d4c0757",
+      "name": "Add to Notion database",
+      "type": "n8n-nodes-base.notion",
+      "position": [
+        780,
+        240
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "interval": 30
+      },
+      "id": "3c15e2b3-39bd-47a6-a1e6-ae929519e7a2",
+      "name": "Every 30 secs",
+      "type": "n8n-nodes-base.interval",
+      "position": [
+        380,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Get all tasks with specific label\"].json[\"due\"][\"date\"]}}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "476a9e17-6b36-4202-aa93-670009ec0d6b",
+      "name": "If date exists",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        1180,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "start": "={{$node[\"Get all tasks with specific label\"].json[\"due\"][\"date\"]}}",
+        "end": "={{$node[\"Get all tasks with specific label\"].json[\"due\"][\"date\"]}}",
+        "additionalFields": {
+          "allday": "yes",
+          "description": "={{ $node[\"Get all tasks with specific label\"].json[\"description\"] }}",
+          "location": "={{ $node[\"Get all tasks with specific label\"].json[\"url\"] }}",
+          "summary": "={{ $node[\"Get all tasks with specific label\"].json[\"content\"] }}"
+        }
+      },
+      "id": "2cfaeb83-0124-4552-98fe-8bbc562b7a9a",
+      "name": "Create all-day event",
+      "type": "n8n-nodes-base.googleCalendar",
+      "position": [
+        1380,
+        240
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true,
+        "filters": {
+          "labelId": "GCal",
+          "projectId": ""
+        }
+      },
+      "id": "7b65babb-8740-4025-845f-76418af7f493",
+      "name": "Get all tasks with specific label",
+      "type": "n8n-nodes-base.todoist",
+      "position": [
+        580,
+        240
+      ],
+      "typeVersion": 2,
+      "credentials": {
+        "todoistApi": {
+          "id": "6P4wmNTCy9Oov4Yc",
+          "name": "Todoist account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-01-16T17:32:06.000Z",
+  "versionId": "15df6353-fc38-44de-9102-91e89a1a9330"
+}
