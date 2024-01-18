@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Every 30 secs": {
       "main": [
@@ -8,26 +8,9 @@
             "node": "Get all tasks with specific label",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "If date exists": {
-      "main": [
-        [
+          },
           {
-            "node": "Create all-day event",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Replace label on task": {
-      "main": [
-        [
-          {
-            "node": "If date exists",
+            "node": "Gen Unsynced options",
             "type": "main",
             "index": 0
           }
@@ -55,6 +38,27 @@
           }
         ]
       ]
+    },
+    "Todoist": {
+      "main": [
+        []
+      ]
+    },
+    "Gen Unsynced options": {
+      "main": [
+        [
+          {
+            "node": "Todoist",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notion1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2024-01-16T17:01:25.484Z",
@@ -68,7 +72,7 @@
         "taskId": "={{ $json[\"property_todoist_id\"] }}",
         "updateFields": {
           "labels": [
-            2161562984
+            "2171039136"
           ]
         }
       },
@@ -79,22 +83,28 @@
         980,
         240
       ],
-      "typeVersion": 1
+      "typeVersion": 1,
+      "credentials": {
+        "todoistApi": {
+          "id": "6P4wmNTCy9Oov4Yc",
+          "name": "Todoist account"
+        }
+      }
     },
     {
       "parameters": {
         "resource": "databasePage",
         "databaseId": {
           "__rl": true,
-          "mode": "list",
-          "value": ""
+          "value": "c29dc72971854752a968602380e354af",
+          "mode": "id"
         },
         "title": "={{ $json[\"content\"] }}",
         "propertiesUi": {
           "propertyValues": [
             {
-              "key": "Todoist ID|number",
-              "numberValue": "={{ parseInt($json.id) }}"
+              "key": "TodoistId|rich_text",
+              "textContent": "={{ $json.id }}"
             }
           ]
         },
@@ -107,7 +117,13 @@
         780,
         240
       ],
-      "typeVersion": 2
+      "typeVersion": 2,
+      "credentials": {
+        "notionApi": {
+          "id": "dnDUYEoNp3HvYlPc",
+          "name": "Notion account"
+        }
+      }
     },
     {
       "parameters": {
@@ -117,52 +133,7 @@
       "name": "Every 30 secs",
       "type": "n8n-nodes-base.interval",
       "position": [
-        380,
-        240
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{$node[\"Get all tasks with specific label\"].json[\"due\"][\"date\"]}}",
-              "operation": "isNotEmpty"
-            }
-          ]
-        }
-      },
-      "id": "476a9e17-6b36-4202-aa93-670009ec0d6b",
-      "name": "If date exists",
-      "type": "n8n-nodes-base.if",
-      "position": [
-        1180,
-        240
-      ],
-      "typeVersion": 1
-    },
-    {
-      "parameters": {
-        "calendar": {
-          "__rl": true,
-          "mode": "list",
-          "value": ""
-        },
-        "start": "={{$node[\"Get all tasks with specific label\"].json[\"due\"][\"date\"]}}",
-        "end": "={{$node[\"Get all tasks with specific label\"].json[\"due\"][\"date\"]}}",
-        "additionalFields": {
-          "allday": "yes",
-          "description": "={{ $node[\"Get all tasks with specific label\"].json[\"description\"] }}",
-          "location": "={{ $node[\"Get all tasks with specific label\"].json[\"url\"] }}",
-          "summary": "={{ $node[\"Get all tasks with specific label\"].json[\"content\"] }}"
-        }
-      },
-      "id": "2cfaeb83-0124-4552-98fe-8bbc562b7a9a",
-      "name": "Create all-day event",
-      "type": "n8n-nodes-base.googleCalendar",
-      "position": [
-        1380,
+        240,
         240
       ],
       "typeVersion": 1
@@ -170,10 +141,8 @@
     {
       "parameters": {
         "operation": "getAll",
-        "returnAll": true,
         "filters": {
-          "labelId": "GCal",
-          "projectId": ""
+          "labelId": "notion"
         }
       },
       "id": "7b65babb-8740-4025-845f-76418af7f493",
@@ -190,6 +159,104 @@
           "name": "Todoist account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "close",
+        "taskId": "={{ $json.properties.TodoistId.rich_text[0].text.content }}"
+      },
+      "id": "5f59b929-56da-4522-8999-0991b09e9a0d",
+      "name": "Todoist",
+      "type": "n8n-nodes-base.todoist",
+      "typeVersion": 2,
+      "position": [
+        700,
+        0
+      ],
+      "credentials": {
+        "todoistApi": {
+          "id": "6P4wmNTCy9Oov4Yc",
+          "name": "Todoist account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $('Gen Unsynced options').item.json.id }}",
+          "mode": "id"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "synced_todoist|checkbox",
+              "checkboxValue": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "32c83ed7-bec2-4101-823b-f6b4bc11ef26",
+      "name": "Notion1",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        840,
+        -180
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "dnDUYEoNp3HvYlPc",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "c29dc729-7185-4752-a968-602380e354af",
+          "mode": "list",
+          "cachedResultName": "Work TO-DO",
+          "cachedResultUrl": "https://www.notion.so/c29dc72971854752a968602380e354af"
+        },
+        "simple": false,
+        "filterType": "manual",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "key": "Done|checkbox",
+              "condition": "equals",
+              "checkboxValue": true
+            },
+            {
+              "key": "synced_todoist|checkbox",
+              "condition": "equals"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ea10c676-91cf-4154-9ba4-d078a65d94fd",
+      "name": "Gen Unsynced options",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "credentials": {
+        "notionApi": {
+          "id": "dnDUYEoNp3HvYlPc",
+          "name": "Notion account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -198,7 +265,7 @@
   },
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-01-16T17:32:06.000Z",
-  "versionId": "15df6353-fc38-44de-9102-91e89a1a9330"
+  "triggerCount": 1,
+  "updatedAt": "2024-01-18T15:21:57.000Z",
+  "versionId": "15025e8f-f98f-4b01-9b48-5de05ad6ff24"
 }
