@@ -1,0 +1,60 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2024-01-25T20:36:00.481Z",
+  "id": "rRuf4xtaih1CbagV",
+  "meta": null,
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2b870a1e-b14d-4bf6-9b4d-be0cbd16c28f",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        720,
+        380
+      ],
+      "webhookId": "2a31a9c5-b426-43d8-bbad-1cd79a9501c0"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableName": "mul.chat.dev",
+        "scan": true,
+        "eavUi": {
+          "eavValues": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "8d190651-fe79-433a-95c5-7adbc8c1c334",
+      "name": "AWS DynamoDB",
+      "type": "n8n-nodes-base.awsDynamoDb",
+      "typeVersion": 1,
+      "position": [
+        940,
+        380
+      ],
+      "credentials": {
+        "aws": {
+          "id": "iyx5GTHf6QoYeVBP",
+          "name": "AWS account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-01-25T20:36:00.481Z",
+  "versionId": "04d70e99-8e34-4ce1-b21c-3dcf9628ff4f"
+}
