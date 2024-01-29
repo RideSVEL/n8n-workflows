@@ -1,6 +1,56 @@
 {
-  "active": false,
-  "connections": {},
+  "active": true,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Todoist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Todoist": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to Serejka": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send to Serejka",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2024-01-13T11:30:15.902Z",
   "id": "SrEMgtdSvD573W2Q",
   "meta": null,
@@ -24,50 +74,127 @@
       "webhookId": "e2296f12-75cb-476d-af11-5fcacf6e389d",
       "credentials": {
         "telegramApi": {
+          "id": "s2N6mt0zma0Ixe4a",
+          "name": "Serejka Worker BOT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.chat.id }}",
+        "text": "=Hi {{ $json.message.chat.first_name }}, you sent to me: \"{{ $json.message.text }}\"",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "5a48f54f-c5ed-47c4-a1ed-cfa49dd31153",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        1020,
+        340
+      ],
+      "credentials": {
+        "telegramApi": {
           "id": "jlP925DmXfOGYCJD",
           "name": "Serejka Worker BOT"
         }
       }
-    }
-  ],
-  "pinData": {
-    "Telegram Trigger": [
-      {
-        "json": {
-          "update_id": 484898004,
-          "message": {
-            "message_id": 3,
-            "from": {
-              "id": 5217553853,
-              "is_bot": false,
-              "first_name": "Sergey",
-              "last_name": "Vasylchenko",
-              "username": "SergeyVasilchenko",
-              "language_code": "en"
-            },
-            "chat": {
-              "id": 5217553853,
-              "first_name": "Sergey",
-              "last_name": "Vasylchenko",
-              "username": "SergeyVasilchenko",
-              "type": "private"
-            },
-            "date": 1705230233,
-            "text": "😅"
-          }
-        },
-        "pairedItem": {
-          "item": 0
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "id": "194dc409-e4a5-497f-bbb1-23fb6fb400d4",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 200,
+        "filters": {
+          "filter": "today | overdue"
+        }
+      },
+      "id": "8fce0178-3d5f-44cc-abb0-bd868e4fe23f",
+      "name": "Todoist",
+      "type": "n8n-nodes-base.todoist",
+      "typeVersion": 2,
+      "position": [
+        1020,
+        0
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "todoistApi": {
+          "id": "6P4wmNTCy9Oov4Yc",
+          "name": "Todoist account"
         }
       }
-    ]
-  },
+    },
+    {
+      "parameters": {
+        "chatId": "5217553853",
+        "text": "=Tasks for today:\n\n{{ $json.content }} ",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "024dcb53-6eac-4f7c-8776-d7e16ef607f2",
+      "name": "Send to Serejka",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        1500,
+        20
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "jlP925DmXfOGYCJD",
+          "name": "Serejka Worker BOT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "include": "selected",
+        "includeFields": "content",
+        "options": {}
+      },
+      "id": "4d22b920-4d68-41f2-ba6b-6af26815afea",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1240,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2024-01-14T11:06:03.000Z",
-  "versionId": "b8e48ae3-adce-4e18-b164-449cda4c784c"
+  "triggerCount": 2,
+  "updatedAt": "2024-01-29T10:43:42.000Z",
+  "versionId": "62071028-ac39-4bcb-97f3-11f0a2912b0e"
 }
