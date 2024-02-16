@@ -1,49 +1,103 @@
 {
   "active": false,
-  "connections": {},
-  "createdAt": "2024-01-25T20:36:00.481Z",
-  "id": "rRuf4xtaih1CbagV",
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-02-16T10:56:35.909Z",
+  "id": "SkFhbaEH5IXQ3YbC",
   "meta": null,
   "name": "My workflow",
   "nodes": [
     {
       "parameters": {
-        "options": {}
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
       },
-      "id": "2b870a1e-b14d-4bf6-9b4d-be0cbd16c28f",
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
+      "id": "9ea1b107-8038-40bc-912d-56338ab0c812",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
       "position": [
-        720,
-        380
-      ],
-      "webhookId": "2a31a9c5-b426-43d8-bbad-1cd79a9501c0"
+        820,
+        360
+      ]
     },
     {
       "parameters": {
-        "operation": "getAll",
-        "tableName": "mul.chat.dev",
-        "scan": true,
-        "eavUi": {
-          "eavValues": [
-            {}
+        "url": "https://api.etherscan.io/api",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "module",
+              "value": "account"
+            },
+            {
+              "name": "action",
+              "value": "txlist"
+            },
+            {
+              "name": "address",
+              "value": "0x19370B033d5e5613a05449CD2404AB768Fd60615"
+            },
+            {
+              "name": "startblock",
+              "value": "0"
+            },
+            {
+              "name": "endblock",
+              "value": "99999999"
+            },
+            {
+              "name": "page",
+              "value": "1"
+            },
+            {
+              "name": "offset",
+              "value": "10"
+            },
+            {
+              "name": "sort",
+              "value": "desc"
+            }
           ]
         },
-        "options": {}
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
       },
-      "id": "8d190651-fe79-433a-95c5-7adbc8c1c334",
-      "name": "AWS DynamoDB",
-      "type": "n8n-nodes-base.awsDynamoDb",
-      "typeVersion": 1,
+      "id": "d2c13ab2-a617-4494-9b0b-761eeb20dc35",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
       "position": [
-        940,
-        380
+        980,
+        360
       ],
       "credentials": {
-        "aws": {
-          "id": "iyx5GTHf6QoYeVBP",
-          "name": "AWS account"
+        "httpQueryAuth": {
+          "id": "zz2b581NE1M02F9N",
+          "name": "Etherscan"
         }
       }
     }
@@ -55,6 +109,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-01-25T20:36:00.481Z",
-  "versionId": "04d70e99-8e34-4ce1-b21c-3dcf9628ff4f"
+  "updatedAt": "2024-02-16T11:06:13.000Z",
+  "versionId": "c631dc7e-e28c-4e6f-95b4-34adabf79644"
 }
