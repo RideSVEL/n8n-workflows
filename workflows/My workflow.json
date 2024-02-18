@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "GET TRANSACTIONS",
             "type": "main",
             "index": 0
           }
@@ -34,7 +34,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.1,
       "position": [
-        820,
+        740,
         360
       ]
     },
@@ -87,7 +87,7 @@
         }
       },
       "id": "d2c13ab2-a617-4494-9b0b-761eeb20dc35",
-      "name": "HTTP Request",
+      "name": "GET TRANSACTIONS",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
@@ -109,6 +109,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-02-16T11:06:13.000Z",
-  "versionId": "c631dc7e-e28c-4e6f-95b4-34adabf79644"
+  "updatedAt": "2024-02-18T13:06:37.000Z",
+  "versionId": "8cd6100f-0167-48f9-b14a-f2ad3fb6cfb1"
 }
