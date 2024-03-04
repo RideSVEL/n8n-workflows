@@ -1,0 +1,482 @@
+{
+  "active": true,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "GET TRANSACTIONS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET TRANSACTIONS": {
+      "main": [
+        [
+          {
+            "node": "GET HASH LAST TRX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET HASH LAST TRX": {
+      "main": [
+        [
+          {
+            "node": "LAST PROCESSED TRX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LAST PROCESSED TRX": {
+      "main": [
+        [
+          {
+            "node": "NOT EQUAL HASH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "UPDATE HASH",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NOT EQUAL HASH": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram1": {
+      "main": [
+        [
+          {
+            "node": "UPDATE NTF COUNT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-02-16T10:56:35.909Z",
+  "id": "SkFhbaEH5IXQ3YbC",
+  "meta": null,
+  "name": "ETHERSCAN",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "9ea1b107-8038-40bc-912d-56338ab0c812",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        740,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.etherscan.io/api",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "module",
+              "value": "account"
+            },
+            {
+              "name": "action",
+              "value": "txlist"
+            },
+            {
+              "name": "address",
+              "value": "0x19370B033d5e5613a05449CD2404AB768Fd60615"
+            },
+            {
+              "name": "startblock",
+              "value": "0"
+            },
+            {
+              "name": "endblock",
+              "value": "99999999"
+            },
+            {
+              "name": "page",
+              "value": "0"
+            },
+            {
+              "name": "offset",
+              "value": "10"
+            },
+            {
+              "name": "sort",
+              "value": "desc"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "id": "d2c13ab2-a617-4494-9b0b-761eeb20dc35",
+      "name": "GET TRANSACTIONS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        980,
+        360
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "zz2b581NE1M02F9N",
+          "name": "Etherscan"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "include": "selected",
+        "includeFields": "result[0].hash",
+        "options": {}
+      },
+      "id": "dcc5e7c3-5bdf-4432-ae3a-9bb13f782ed2",
+      "name": "GET HASH LAST TRX",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1200,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "etherscan_lst_trx",
+          "mode": "list",
+          "cachedResultName": "etherscan_lst_trx"
+        },
+        "limit": 1,
+        "options": {}
+      },
+      "id": "8641c28c-1d65-492c-9e2c-a3f18103d9aa",
+      "name": "LAST PROCESSED TRX",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.3,
+      "position": [
+        1400,
+        360
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "xiEGHmvBb78GwyNM",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5217553853",
+        "text": "=💰New TRX💰 NTF #{{'1'}} \n\n⚠️On your Wallet new transaction, please check⚠️\n\n⏬\n\n🪙Wallet:0x19370b033d5e5613a05449cd2404ab768fd60615",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "1f9ca6a5-e23e-4a5a-b9af-d0c9d3188beb",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2040,
+        120
+      ],
+      "notesInFlow": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "jlP925DmXfOGYCJD",
+          "name": "Serejka Worker BOT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.hash }}",
+              "operation": "notEqual",
+              "value2": "={{ $('GET HASH LAST TRX').item.json.hash }}"
+            }
+          ]
+        }
+      },
+      "id": "4e1355c9-ed55-4ae5-b2e5-5c0ae978497f",
+      "name": "NOT EQUAL HASH",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.notifications_count }}",
+              "value2": 3
+            }
+          ]
+        }
+      },
+      "id": "bc92866b-1561-4ec7-a79a-09339f9e3472",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1800,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "5217553853",
+        "text": "=💰New TRX💰 NTF #{{ $json.notifications_count+1}}\n\n⚠️On your Wallet new transaction, please check⚠️\n\n⏬\n\n🪙Wallet:0x19370b033d5e5613a05449cd2404ab768fd60615 ",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "e1cb0823-6e25-4f74-9cb1-de99d4ae2d0b",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        360
+      ],
+      "notesInFlow": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "jlP925DmXfOGYCJD",
+          "name": "Serejka Worker BOT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "etherscan_lst_trx",
+          "mode": "list",
+          "cachedResultName": "etherscan_lst_trx"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('NOT EQUAL HASH').item.json.id }}",
+            "hash": "={{ $('GET HASH LAST TRX').item.json.hash }}",
+            "notifications_count": "={{ $('IF').item.json.notifications_count + 1 }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "hash",
+              "displayName": "hash",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notifications_count",
+              "displayName": "notifications_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "238e55a0-3965-44f5-8789-0901510cc184",
+      "name": "UPDATE NTF COUNT",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.3,
+      "position": [
+        2300,
+        360
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "xiEGHmvBb78GwyNM",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "etherscan_lst_trx",
+          "mode": "list",
+          "cachedResultName": "etherscan_lst_trx"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('NOT EQUAL HASH').item.json.id }}",
+            "hash": "={{ $('GET HASH LAST TRX').item.json.hash }}",
+            "notifications_count": 1
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "hash",
+              "displayName": "hash",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notifications_count",
+              "displayName": "notifications_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8fd673bd-8845-4891-b100-801e4660139c",
+      "name": "UPDATE HASH",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.3,
+      "position": [
+        2240,
+        120
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "xiEGHmvBb78GwyNM",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2024-03-03T22:13:29.000Z",
+  "versionId": "dc31fe22-e6e2-43c1-89dc-27cedba3191a"
+}
