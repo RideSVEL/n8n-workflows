@@ -235,7 +235,7 @@
     {
       "parameters": {
         "chatId": "5217553853",
-        "text": "=💰New TRX💰 NTF #{{'1'}} \n\n⚠️On your Wallet new transaction, please check⚠️\n\n⏬\n\n🪙Wallet:0x19370b033d5e5613a05449cd2404ab768fd60615",
+        "text": "=💰New TRX💰 NTF #{{1}}\n\n⚠️On your Wallet new transaction, please check⚠️\n\n💸 Hash: {{ $('GET HASH LAST TRX').item.json.hash }}\n\n🪙Wallet:0x19370b033d5e5613a05449cd2404ab768fd60615  ",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -300,7 +300,7 @@
     {
       "parameters": {
         "chatId": "5217553853",
-        "text": "=💰New TRX💰 NTF #{{ $json.notifications_count+1}}\n\n⚠️On your Wallet new transaction, please check⚠️\n\n⏬\n\n🪙Wallet:0x19370b033d5e5613a05449cd2404ab768fd60615 ",
+        "text": "=💰New TRX💰 NTF #{{ $json.notifications_count+1}}\n\n⚠️On your Wallet new transaction, please check⚠️\n\n💸 Hash: {{ $('GET HASH LAST TRX').item.json.hash }}\n\n🪙Wallet:0x19370b033d5e5613a05449cd2404ab768fd60615  ",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -477,6 +477,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-03-03T22:13:29.000Z",
-  "versionId": "dc31fe22-e6e2-43c1-89dc-27cedba3191a"
+  "updatedAt": "2024-03-04T08:59:27.000Z",
+  "versionId": "36b573f7-0209-496e-be70-02f793b926a9"
 }
