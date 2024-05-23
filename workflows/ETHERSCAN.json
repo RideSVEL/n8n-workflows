@@ -264,6 +264,10 @@
               "value1": "={{ $json.hash }}",
               "operation": "notEqual",
               "value2": "={{ $('GET HASH LAST TRX').item.json.hash }}"
+            },
+            {
+              "value1": "={{ $json.hash }}",
+              "operation": "isNotEmpty"
             }
           ]
         }
@@ -477,6 +481,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2024-03-04T08:59:27.000Z",
-  "versionId": "36b573f7-0209-496e-be70-02f793b926a9"
+  "updatedAt": "2024-05-23T11:03:00.000Z",
+  "versionId": "c9b6496d-673f-401e-9642-9ce4538fea4b"
 }
