@@ -1,0 +1,386 @@
+{
+  "active": false,
+  "connections": {
+    "Strava Trigger": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Strava": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2024-05-23T10:58:28.249Z",
+  "id": "GsZxPvd8KNc0Y2vX",
+  "meta": null,
+  "name": "Strava activity merge",
+  "nodes": [
+    {
+      "parameters": {
+        "object": "activity",
+        "event": "create",
+        "options": {}
+      },
+      "id": "ae6d96ac-ad90-4ec7-829a-bc565d8ec5d7",
+      "name": "Strava Trigger",
+      "type": "n8n-nodes-base.stravaTrigger",
+      "typeVersion": 1,
+      "position": [
+        740,
+        560
+      ],
+      "webhookId": "fe826703-c487-4ca8-9d69-026ed84215d6",
+      "credentials": {
+        "stravaOAuth2Api": {
+          "id": "1mc9aV3hcDnt0sSM",
+          "name": "Strava account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.object_data.type }}",
+              "value2": "=WeightTraining"
+            }
+          ]
+        }
+      },
+      "id": "d858dd59-3ffa-4a73-9d81-099d1ed3a7f2",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "activityId": "11472896273"
+      },
+      "id": "47eadeb9-e677-4416-b5c3-09207da9a423",
+      "name": "Strava",
+      "type": "n8n-nodes-base.strava",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        280
+      ],
+      "credentials": {
+        "stravaOAuth2Api": {
+          "id": "1mc9aV3hcDnt0sSM",
+          "name": "Strava account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.object_data.device_name }}",
+              "operation": "contains",
+              "value2": "Garmin"
+            },
+            {
+              "value1": "={{ $json.object_data.device_name }}",
+              "operation": "contains",
+              "value2": "Hevy"
+            },
+            {
+              "value1": "={{ $json.object_data.device_name }}",
+              "operation": "contains",
+              "value2": "iPhone"
+            }
+          ]
+        },
+        "combineOperation": "any"
+      },
+      "id": "a732e856-a819-4aa9-b181-9a38cfd6bf3f",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        480
+      ]
+    }
+  ],
+  "pinData": {
+    "Strava Trigger": [
+      {
+        "json": {
+          "aspect_type": "create",
+          "event_time": 1716473367,
+          "object_id": 11478982814,
+          "object_type": "activity",
+          "owner_id": 5494994,
+          "subscription_id": 259010,
+          "updates": {},
+          "object_data": {
+            "resource_state": 3,
+            "athlete": {
+              "id": 5494994,
+              "resource_state": 1
+            },
+            "name": "Afternoon Weight Training",
+            "distance": 0,
+            "moving_time": 6,
+            "elapsed_time": 6,
+            "total_elevation_gain": 0,
+            "type": "WeightTraining",
+            "sport_type": "WeightTraining",
+            "id": 11478982814,
+            "start_date": "2024-05-23T14:09:15Z",
+            "start_date_local": "2024-05-23T17:09:15Z",
+            "timezone": "(GMT+03:00) Africa/Addis_Ababa",
+            "utc_offset": 10800,
+            "location_city": null,
+            "location_state": null,
+            "location_country": "Украина",
+            "achievement_count": 0,
+            "kudos_count": 0,
+            "comment_count": 0,
+            "athlete_count": 1,
+            "photo_count": 0,
+            "map": {
+              "id": "a11478982814",
+              "polyline": "",
+              "resource_state": 3,
+              "summary_polyline": ""
+            },
+            "trainer": true,
+            "commute": false,
+            "manual": false,
+            "private": false,
+            "visibility": "everyone",
+            "flagged": false,
+            "gear_id": null,
+            "start_latlng": [],
+            "end_latlng": [],
+            "average_speed": 0,
+            "max_speed": 0,
+            "has_heartrate": false,
+            "heartrate_opt_out": false,
+            "display_hide_heartrate_option": false,
+            "elev_high": 0,
+            "elev_low": 0,
+            "upload_id": 12255211537,
+            "upload_id_str": "12255211537",
+            "external_id": "973EC146-DDF1-408C-9F93-9FECB0E234FF-activity.fit",
+            "from_accepted_tag": false,
+            "pr_count": 0,
+            "total_photo_count": 0,
+            "has_kudoed": false,
+            "description": null,
+            "calories": 0,
+            "perceived_exertion": null,
+            "prefer_perceived_exertion": null,
+            "segment_efforts": [],
+            "laps": [
+              {
+                "id": 40065470344,
+                "resource_state": 2,
+                "name": "Lap 1",
+                "activity": {
+                  "id": 11478982814,
+                  "visibility": "everyone",
+                  "resource_state": 1
+                },
+                "athlete": {
+                  "id": 5494994,
+                  "resource_state": 1
+                },
+                "elapsed_time": 6,
+                "moving_time": 6,
+                "start_date": "2024-05-23T14:09:15Z",
+                "start_date_local": "2024-05-23T17:09:15Z",
+                "distance": 0,
+                "average_speed": 0,
+                "max_speed": 0,
+                "lap_index": 1,
+                "split": 1,
+                "start_index": 0,
+                "end_index": 1,
+                "total_elevation_gain": 0,
+                "device_watts": false
+              }
+            ],
+            "photos": {
+              "primary": null,
+              "count": 0
+            },
+            "stats_visibility": [
+              {
+                "type": "heart_rate",
+                "visibility": "everyone"
+              },
+              {
+                "type": "pace",
+                "visibility": "everyone"
+              },
+              {
+                "type": "power",
+                "visibility": "everyone"
+              },
+              {
+                "type": "speed",
+                "visibility": "everyone"
+              },
+              {
+                "type": "calories",
+                "visibility": "everyone"
+              }
+            ],
+            "hide_from_home": false,
+            "device_name": "Strava iPhone App",
+            "embed_token": "f731466e9bbcb6434f3da098a301a4833a160322",
+            "available_zones": []
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Strava": [
+      {
+        "json": {
+          "resource_state": 3,
+          "athlete": {
+            "id": 5494994,
+            "resource_state": 1
+          },
+          "name": "Legs+Shoulders",
+          "distance": 0,
+          "moving_time": 4533,
+          "elapsed_time": 4533,
+          "total_elevation_gain": 0,
+          "type": "WeightTraining",
+          "sport_type": "WeightTraining",
+          "id": 11472896273,
+          "start_date": "2024-05-22T16:35:01Z",
+          "start_date_local": "2024-05-22T19:35:01Z",
+          "timezone": "(GMT+02:00) Europe/Kiev",
+          "utc_offset": 10800,
+          "location_city": null,
+          "location_state": null,
+          "location_country": "Украина",
+          "achievement_count": 0,
+          "kudos_count": 9,
+          "comment_count": 0,
+          "athlete_count": 1,
+          "photo_count": 0,
+          "map": {
+            "id": "a11472896273",
+            "polyline": "",
+            "resource_state": 3,
+            "summary_polyline": ""
+          },
+          "trainer": false,
+          "commute": false,
+          "manual": true,
+          "private": false,
+          "visibility": "everyone",
+          "flagged": false,
+          "gear_id": null,
+          "start_latlng": [],
+          "end_latlng": [],
+          "average_speed": 0,
+          "max_speed": 0,
+          "has_heartrate": false,
+          "heartrate_opt_out": false,
+          "display_hide_heartrate_option": false,
+          "upload_id": null,
+          "external_id": null,
+          "from_accepted_tag": false,
+          "pr_count": 0,
+          "total_photo_count": 1,
+          "has_kudoed": false,
+          "description": "Logged with Hevy\n\nLeg Press (Machine)\nSet 1: 100 kg x 50\nSet 2: 200 kg x 20\nSet 3: 300 kg x 15\nSet 4: 300 kg x 15\nSet 5: 300 kg x 15\nSet 6: 300 kg x 15\n\nHip Thrust (Barbell)\nSet 1: 100 kg x 15\nSet 2: 100 kg x 15\nSet 3: 100 kg x 15\nSet 4: 100 kg x 15\n\nLeg Extension (Machine)\nSet 1: 60 kg x 20\nSet 2: 65 kg x 20\nSet 3: 65 kg x 20\n\nLying Leg Curl (Machine)\nSet 1: 55 kg x 15\nSet 2: 55 kg x 15\nSet 3: 60 kg x 15\n\nHandstand Push Up\nSet 1: 16 reps\nSet 2: 12 reps\nSet 3: 8 reps\nSet 4: 10 reps\n\nLateral Raise (Dumbbell)\nSet 1: 35 kg x 20\nSet 2: 35 kg x 20\nSet 3: 35 kg x 20\nSet 4: 35 kg x 20\n\nFace Pull\nSet 1: 96 kg x 15\nSet 2: 96 kg x 15\nSet 3: 96 kg x 15\nSet 4: 96 kg x 15\n\nПланш С Ногамт\nSet 1: 30s\nSet 2: 30s\nSet 3: 30s\nSet 4: 30s\n\nHip Adduction (Machine)\nSet 1: 80 kg x 30\nSet 2: 80 kg x 30\nSet 3: 80 kg x 30\n\nHip Abduction (Machine)\nSet 1: 80 kg x 30\nSet 2: 80 kg x 30\nSet 3: 80 kg x 30\n\nCalf Extension (Machine)\nSet 1: 180 kg x 30\nSet 2: 180 kg x 30\nSet 3: 180 kg x 30\nSet 4: 180 kg x 30\n",
+          "calories": 0,
+          "perceived_exertion": null,
+          "prefer_perceived_exertion": null,
+          "segment_efforts": [],
+          "photos": {
+            "primary": {
+              "unique_id": "6db30e27-d391-4164-9187-5b3bce1e8a28",
+              "urls": {
+                "100": "https://dgtzuqphqg23d.cloudfront.net/kIE5rflLftfvxKLSsLn9y9FGuFnrE2n2JusDzxr_EFk-128x85.jpg",
+                "600": "https://dgtzuqphqg23d.cloudfront.net/kIE5rflLftfvxKLSsLn9y9FGuFnrE2n2JusDzxr_EFk-768x512.jpg"
+              },
+              "source": 1,
+              "media_type": 1
+            },
+            "use_primary_photo": true,
+            "count": 1
+          },
+          "stats_visibility": [
+            {
+              "type": "heart_rate",
+              "visibility": "everyone"
+            },
+            {
+              "type": "pace",
+              "visibility": "everyone"
+            },
+            {
+              "type": "power",
+              "visibility": "everyone"
+            },
+            {
+              "type": "speed",
+              "visibility": "everyone"
+            },
+            {
+              "type": "calories",
+              "visibility": "everyone"
+            }
+          ],
+          "hide_from_home": false,
+          "device_name": "Hevy",
+          "embed_token": "53b4d93ce40373fa63a9744f7ec1ac06f3975522",
+          "available_zones": []
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Strava Trigger": {
+      "webhookId": 259010
+    }
+  },
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-05-23T14:25:15.000Z",
+  "versionId": "55ea0684-ff7c-4543-a1a3-e2dbc982d740"
+}
