@@ -5,25 +5,76 @@
       "main": [
         [
           {
-            "node": "IF",
+            "node": "IF WeightTrain",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "IF": {
+    "IF GARMIN": {
       "main": [
         [
           {
-            "node": "IF1",
+            "node": "Save Garmin",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "IF HEVY",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Strava": {
+    "IF WeightTrain": {
+      "main": [
+        [
+          {
+            "node": "IF GARMIN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF HEVY": {
+      "main": [
+        [
+          {
+            "node": "Save hevy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save hevy": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Save Garmin": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
       "main": [
         []
       ]
@@ -45,50 +96,10 @@
       "type": "n8n-nodes-base.stravaTrigger",
       "typeVersion": 1,
       "position": [
-        740,
-        560
+        680,
+        520
       ],
       "webhookId": "fe826703-c487-4ca8-9d69-026ed84215d6",
-      "credentials": {
-        "stravaOAuth2Api": {
-          "id": "1mc9aV3hcDnt0sSM",
-          "name": "Strava account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.object_data.type }}",
-              "value2": "=WeightTraining"
-            }
-          ]
-        }
-      },
-      "id": "d858dd59-3ffa-4a73-9d81-099d1ed3a7f2",
-      "name": "IF",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        1000,
-        560
-      ]
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "activityId": "11472896273"
-      },
-      "id": "47eadeb9-e677-4416-b5c3-09207da9a423",
-      "name": "Strava",
-      "type": "n8n-nodes-base.strava",
-      "typeVersion": 1,
-      "position": [
-        1040,
-        280
-      ],
       "credentials": {
         "stravaOAuth2Api": {
           "id": "1mc9aV3hcDnt0sSM",
@@ -104,28 +115,117 @@
               "value1": "={{ $json.object_data.device_name }}",
               "operation": "contains",
               "value2": "Garmin"
-            },
-            {
-              "value1": "={{ $json.object_data.device_name }}",
-              "operation": "contains",
-              "value2": "Hevy"
-            },
-            {
-              "value1": "={{ $json.object_data.device_name }}",
-              "operation": "contains",
-              "value2": "iPhone"
             }
           ]
         },
         "combineOperation": "any"
       },
       "id": "a732e856-a819-4aa9-b181-9a38cfd6bf3f",
-      "name": "IF1",
+      "name": "IF GARMIN",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        1220,
-        480
+        1180,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.object_data.device_name }}",
+              "value2": "Hevy"
+            }
+          ]
+        }
+      },
+      "id": "48a5b59c-5ade-479e-9ce8-5511ef2c43af",
+      "name": "IF HEVY",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.object_data.type }}",
+              "value2": "=WeightTraining"
+            }
+          ]
+        }
+      },
+      "id": "d858dd59-3ffa-4a73-9d81-099d1ed3a7f2",
+      "name": "IF WeightTrain",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        920,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "garmin.train.id",
+        "value": "={{ $json.object_id }}",
+        "keyType": "string",
+        "expire": true,
+        "ttl": 86400
+      },
+      "id": "c5c6d8ba-56a5-4483-8425-e562d29ac66d",
+      "name": "Save Garmin",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        440
+      ],
+      "credentials": {
+        "redis": {
+          "id": "dVQY2alm6BXTCC5v",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "hevy.train.id",
+        "value": "={{ $json.object_id }}",
+        "keyType": "string",
+        "expire": true,
+        "ttl": 86400
+      },
+      "id": "558e073c-77d3-4a1c-a026-c516ba422b4f",
+      "name": "Save hevy",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        620
+      ],
+      "credentials": {
+        "redis": {
+          "id": "dVQY2alm6BXTCC5v",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "364d8693-2117-4fef-993f-e99f39d463e8",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [
+        1760,
+        460
       ]
     }
   ],
@@ -256,117 +356,10 @@
               }
             ],
             "hide_from_home": false,
-            "device_name": "Strava iPhone App",
+            "device_name": "Hevy",
             "embed_token": "f731466e9bbcb6434f3da098a301a4833a160322",
             "available_zones": []
           }
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ],
-    "Strava": [
-      {
-        "json": {
-          "resource_state": 3,
-          "athlete": {
-            "id": 5494994,
-            "resource_state": 1
-          },
-          "name": "Legs+Shoulders",
-          "distance": 0,
-          "moving_time": 4533,
-          "elapsed_time": 4533,
-          "total_elevation_gain": 0,
-          "type": "WeightTraining",
-          "sport_type": "WeightTraining",
-          "id": 11472896273,
-          "start_date": "2024-05-22T16:35:01Z",
-          "start_date_local": "2024-05-22T19:35:01Z",
-          "timezone": "(GMT+02:00) Europe/Kiev",
-          "utc_offset": 10800,
-          "location_city": null,
-          "location_state": null,
-          "location_country": "Украина",
-          "achievement_count": 0,
-          "kudos_count": 9,
-          "comment_count": 0,
-          "athlete_count": 1,
-          "photo_count": 0,
-          "map": {
-            "id": "a11472896273",
-            "polyline": "",
-            "resource_state": 3,
-            "summary_polyline": ""
-          },
-          "trainer": false,
-          "commute": false,
-          "manual": true,
-          "private": false,
-          "visibility": "everyone",
-          "flagged": false,
-          "gear_id": null,
-          "start_latlng": [],
-          "end_latlng": [],
-          "average_speed": 0,
-          "max_speed": 0,
-          "has_heartrate": false,
-          "heartrate_opt_out": false,
-          "display_hide_heartrate_option": false,
-          "upload_id": null,
-          "external_id": null,
-          "from_accepted_tag": false,
-          "pr_count": 0,
-          "total_photo_count": 1,
-          "has_kudoed": false,
-          "description": "Logged with Hevy\n\nLeg Press (Machine)\nSet 1: 100 kg x 50\nSet 2: 200 kg x 20\nSet 3: 300 kg x 15\nSet 4: 300 kg x 15\nSet 5: 300 kg x 15\nSet 6: 300 kg x 15\n\nHip Thrust (Barbell)\nSet 1: 100 kg x 15\nSet 2: 100 kg x 15\nSet 3: 100 kg x 15\nSet 4: 100 kg x 15\n\nLeg Extension (Machine)\nSet 1: 60 kg x 20\nSet 2: 65 kg x 20\nSet 3: 65 kg x 20\n\nLying Leg Curl (Machine)\nSet 1: 55 kg x 15\nSet 2: 55 kg x 15\nSet 3: 60 kg x 15\n\nHandstand Push Up\nSet 1: 16 reps\nSet 2: 12 reps\nSet 3: 8 reps\nSet 4: 10 reps\n\nLateral Raise (Dumbbell)\nSet 1: 35 kg x 20\nSet 2: 35 kg x 20\nSet 3: 35 kg x 20\nSet 4: 35 kg x 20\n\nFace Pull\nSet 1: 96 kg x 15\nSet 2: 96 kg x 15\nSet 3: 96 kg x 15\nSet 4: 96 kg x 15\n\nПланш С Ногамт\nSet 1: 30s\nSet 2: 30s\nSet 3: 30s\nSet 4: 30s\n\nHip Adduction (Machine)\nSet 1: 80 kg x 30\nSet 2: 80 kg x 30\nSet 3: 80 kg x 30\n\nHip Abduction (Machine)\nSet 1: 80 kg x 30\nSet 2: 80 kg x 30\nSet 3: 80 kg x 30\n\nCalf Extension (Machine)\nSet 1: 180 kg x 30\nSet 2: 180 kg x 30\nSet 3: 180 kg x 30\nSet 4: 180 kg x 30\n",
-          "calories": 0,
-          "perceived_exertion": null,
-          "prefer_perceived_exertion": null,
-          "segment_efforts": [],
-          "photos": {
-            "primary": {
-              "unique_id": "6db30e27-d391-4164-9187-5b3bce1e8a28",
-              "urls": {
-                "100": "https://dgtzuqphqg23d.cloudfront.net/kIE5rflLftfvxKLSsLn9y9FGuFnrE2n2JusDzxr_EFk-128x85.jpg",
-                "600": "https://dgtzuqphqg23d.cloudfront.net/kIE5rflLftfvxKLSsLn9y9FGuFnrE2n2JusDzxr_EFk-768x512.jpg"
-              },
-              "source": 1,
-              "media_type": 1
-            },
-            "use_primary_photo": true,
-            "count": 1
-          },
-          "stats_visibility": [
-            {
-              "type": "heart_rate",
-              "visibility": "everyone"
-            },
-            {
-              "type": "pace",
-              "visibility": "everyone"
-            },
-            {
-              "type": "power",
-              "visibility": "everyone"
-            },
-            {
-              "type": "speed",
-              "visibility": "everyone"
-            },
-            {
-              "type": "calories",
-              "visibility": "everyone"
-            }
-          ],
-          "hide_from_home": false,
-          "device_name": "Hevy",
-          "embed_token": "53b4d93ce40373fa63a9744f7ec1ac06f3975522",
-          "available_zones": []
-        },
-        "pairedItem": {
-          "item": 0
         }
       }
     ]
@@ -381,6 +374,6 @@
   },
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-05-23T14:25:15.000Z",
-  "versionId": "55ea0684-ff7c-4543-a1a3-e2dbc982d740"
+  "updatedAt": "2024-05-24T11:29:08.000Z",
+  "versionId": "779473a7-3995-435f-9207-e97812f276e4"
 }
