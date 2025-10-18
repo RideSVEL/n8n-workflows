@@ -82,6 +82,7 @@
   },
   "createdAt": "2025-10-18T11:03:37.975Z",
   "id": "isZu3pnWO4sjQ4XL",
+  "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
@@ -193,7 +194,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        540,
+        544,
         480
       ]
     },
@@ -226,7 +227,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        760,
+        768,
         480
       ]
     },
@@ -260,7 +261,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
       "position": [
-        1080,
+        1088,
         480
       ],
       "alwaysOutputData": true,
@@ -301,8 +302,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1660,
-        380
+        1664,
+        384
       ]
     },
     {
@@ -318,9 +319,10 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        2040,
-        120
+        2048,
+        128
       ],
+      "webhookId": "12ef19c6-a188-46dd-b802-987a8f42b01b",
       "credentials": {
         "telegramApi": {
           "id": "hRlXhEakv5zz31tT",
@@ -337,8 +339,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1380,
-        460
+        1392,
+        464
       ]
     },
     {
@@ -404,7 +406,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
       "position": [
-        1820,
+        1824,
         160
       ],
       "credentials": {
@@ -419,6 +421,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "createdAt": "2025-10-18T11:03:37.979Z",
+      "updatedAt": "2025-10-18T11:03:37.979Z",
+      "role": "workflow:owner",
+      "workflowId": "isZu3pnWO4sjQ4XL",
+      "projectId": "1dpdX6PwTs6u06T1"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": []
@@ -426,6 +437,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-18T15:45:45.000Z",
-  "versionId": "f7b9a6f0-f597-4429-8d0e-6f139ed39822"
+  "updatedAt": "2025-10-18T20:46:01.000Z",
+  "versionId": "5f3ba2be-4ea3-4588-91f6-bfdd10b33a8f"
 }
