@@ -1,11 +1,11 @@
 {
   "active": false,
   "connections": {
-    "Schedule Trigger": {
+    "When clicking ‘Test workflow’": {
       "main": [
         [
           {
-            "node": "GET TRANSACTIONS",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -13,70 +13,42 @@
       ]
     }
   },
-  "createdAt": "2024-02-16T10:56:35.909Z",
-  "id": "SkFhbaEH5IXQ3YbC",
-  "meta": null,
+  "createdAt": "2025-10-18T16:18:09.494Z",
+  "id": "8wzy5TinDEWCDSLu",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "My workflow",
   "nodes": [
     {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "minutes",
-              "minutesInterval": 1
-            }
-          ]
-        }
-      },
-      "id": "9ea1b107-8038-40bc-912d-56338ab0c812",
-      "name": "Schedule Trigger",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.1,
+      "parameters": {},
+      "id": "d901703a-8c5c-4722-92d5-f21c5c8567cc",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
       "position": [
-        740,
-        360
+        600,
+        460
       ]
     },
     {
       "parameters": {
-        "url": "https://api.etherscan.io/api",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpQueryAuth",
+        "url": "https://ingatlan.com/kiado+lakas+havi-350-ezer-Ft-ig+vizafogo-marinapart",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
             {
-              "name": "module",
-              "value": "account"
-            },
+              "name": "limit",
+              "value": "500"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
             {
-              "name": "action",
-              "value": "txlist"
-            },
-            {
-              "name": "address",
-              "value": "0x19370B033d5e5613a05449CD2404AB768Fd60615"
-            },
-            {
-              "name": "startblock",
-              "value": "0"
-            },
-            {
-              "name": "endblock",
-              "value": "99999999"
-            },
-            {
-              "name": "page",
-              "value": "1"
-            },
-            {
-              "name": "offset",
-              "value": "10"
-            },
-            {
-              "name": "sort",
-              "value": "desc"
+              "name": "cookie",
+              "value": "PHPSESSID=64685d886dd2cebd362954579b85417c;__cf_bm=e.AtxCGeMXgNk9ZeCJuQ6uW.H89qFNSwfUi3MDzmLt4-1760804067-1.0.1.1-v_grmK7xGu8NkXYoTUhlECvbvDl08DIpW49TmyLftBP6Xw7Yjxri_sDMOf7DuFCI;_cfuvid=2CaWN0sZMNrL8aeXWpBberaU1nHBxYKaRRrpnVSnrhs-1760804067106-0.0.1.1-604800000;"
             }
           ]
         },
@@ -86,20 +58,14 @@
           }
         }
       },
-      "id": "d2c13ab2-a617-4494-9b0b-761eeb20dc35",
-      "name": "GET TRANSACTIONS",
+      "id": "2d660671-b9e7-4665-a0aa-3b40dceedccb",
+      "name": "HTTP Request",
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
+      "typeVersion": 4.2,
       "position": [
-        980,
-        360
-      ],
-      "credentials": {
-        "httpQueryAuth": {
-          "id": "zz2b581NE1M02F9N",
-          "name": "Etherscan"
-        }
-      }
+        820,
+        460
+      ]
     }
   ],
   "pinData": {},
@@ -109,6 +75,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-02-18T13:06:37.000Z",
-  "versionId": "8cd6100f-0167-48f9-b14a-f2ad3fb6cfb1"
+  "updatedAt": "2025-10-18T16:18:09.494Z",
+  "versionId": "9bdb0b05-0202-46a7-942e-ccfe594afe2f"
 }
