@@ -1,0 +1,468 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Postgres1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Postgres2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres2": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres1": {
+      "main": [
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-16T21:20:19.864Z",
+  "id": "uWsiD3Gbqh2vhaPK",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Apartment Search",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "appartment",
+          "mode": "list",
+          "cachedResultName": "appartment"
+        },
+        "table": {
+          "__rl": true,
+          "value": "search",
+          "mode": "list",
+          "cachedResultName": "search"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "url",
+              "value": "={{ $json.body.url }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9bb34100-218a-43a9-95c4-10e57d407d24",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        820,
+        400
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "xiEGHmvBb78GwyNM",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ingatlan",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "6022ef69-d4dd-43a7-a042-bb5cfc8b66d8",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        600,
+        400
+      ],
+      "webhookId": "6c933219-80ca-46e3-a352-439099168d68"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fd0c2b4a-a8a8-46fa-8144-633695cbdbd2",
+              "leftValue": "={{ $json.url }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": false
+        }
+      },
+      "id": "ed14e7ff-c73b-46d4-aef6-50035ec6b06d",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1040,
+        400
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "value": "appartment",
+          "mode": "list",
+          "cachedResultName": "appartment"
+        },
+        "table": {
+          "__rl": true,
+          "value": "search",
+          "mode": "list",
+          "cachedResultName": "search"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "url": "={{ $('Webhook').item.json.body.url }}",
+            "ids": "={{ $('Webhook').item.json.body.ids }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ids",
+              "displayName": "ids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "array",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d3d31d79-0051-405b-b292-20be2c36a6d7",
+      "name": "Postgres1",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1240,
+        520
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "xiEGHmvBb78GwyNM",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get arr1 from Node A\nconst arr1 = $node[\"Postgres\"].data.ids;\n\n// Get arr2 from Node B\nconst arr2 = $node[\"Webhook\"].data.body.ids;\n\nconst result = arr2.filter(v => !arr1.includes(v));\n\nconsole.log(result)\n\nreturn [{ json: { result } }];"
+      },
+      "id": "e5ae50ec-9287-4e4d-a7cb-6593554264b3",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1260,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "value": "appartment",
+          "mode": "list",
+          "cachedResultName": "appartment"
+        },
+        "table": {
+          "__rl": true,
+          "value": "search",
+          "mode": "list",
+          "cachedResultName": "search"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "url": "={{ $('Postgres').item.json.url }}",
+            "ids": "={{ $('Webhook').item.json.body.ids }}"
+          },
+          "matchingColumns": [
+            "url"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ids",
+              "displayName": "ids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "array",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1920c4bf-dc59-4887-a27a-96b477db6959",
+      "name": "Postgres2",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1740,
+        180
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "xiEGHmvBb78GwyNM",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "be8f4103-0a02-41e5-87d3-1070f7e2ab2b",
+              "leftValue": "={{ $json.result }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6de4391e-9bda-43fe-ba82-31004a89d75a",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1480,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "5217553853",
+        "text": "=No new results found for actual search😒",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "ba8ad025-6d91-45b9-9107-aaa1c956f6de",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1720,
+        440
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "hRlXhEakv5zz31tT",
+          "name": "Flat Searcher"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5217553853",
+        "text": "=Got new results🥳:\n\n{{ $('If1').item.json.result.map(item => `https://ingatlan.com/${item}`).join(\"\\n\")}}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "61ec3eb8-e8bc-467a-bfa6-ab945435234a",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1980,
+        160
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "hRlXhEakv5zz31tT",
+          "name": "Flat Searcher"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "5217553853",
+        "text": "=New search is created",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "0dc7cb95-54f5-407e-ad92-e4397dda6eb9",
+      "name": "Telegram2",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1460,
+        620
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "hRlXhEakv5zz31tT",
+          "name": "Flat Searcher"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-18T11:03:28.000Z",
+  "versionId": "64cb492e-1a8d-41f3-a634-b6d71494e489"
+}
