@@ -1,0 +1,431 @@
+{
+  "active": true,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Postgres2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres2": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-18T11:03:37.975Z",
+  "id": "isZu3pnWO4sjQ4XL",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "IngatlanBazar",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://www.ingatlanbazar.hu/api/property-search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "property_location",
+              "value": "107255"
+            },
+            {
+              "name": "price_max",
+              "value": "350"
+            },
+            {
+              "name": "property_type",
+              "value": "on"
+            },
+            {
+              "name": "property__2",
+              "value": "3"
+            },
+            {
+              "name": "list-order",
+              "value": "1"
+            },
+            {
+              "name": "limit",
+              "value": "500"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json, text/plain, */*"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.9"
+            },
+            {
+              "name": "dnt",
+              "value": "1"
+            },
+            {
+              "name": "priority",
+              "value": "u=1, i"
+            },
+            {
+              "name": "referer",
+              "value": "https://www.ingatlanbazar.hu/alberlet-Budapest-XIII-kerulet-Kiado-Lakas-350-ezer-Ft-ig?property_location=107255&price_max=350&property_type=on&property__2=3&list-order=1"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Chromium\";v=\"141\", \"Not?A_Brand\";v=\"8\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"macOS\""
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "user-agent",
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "cookie",
+              "value": "usprivacy=1---;_vid=f39dab4fe14fad5718e26de99df69cb7;_ga=GA1.1.1154703117.1760707773;euconsent-v2=CQZb0YAQZb0YAAKA9AHUCBFsAP_gAEPgAA6gLrNR_G__bWlr-bb3aftkeYxP9_hr7sQxBgbJk24FzLvW_JwXx2E5NAzatqIKmRIAu3TBIQNlHJDURVCgKIgVryDMaEyUoTNKJ6BkiFMRI2NYCFxvm4tjWQCY5vr99lc1mB-N7dr82dzyy6hHn3a5_2S1WJCdIYetDfv8ZBKT-9IEd_x8v4v4_F7pE2-eS1n_pGvp6j9-Yns_dBmxt-bSffzPn__rl_e7X_vf_n37v94XH77v____f_-7___wXXABMNCogjLIgQCBQMIIEACgrCACgQBAAAkDRAQAmDApyBgAusJkAIAUAAwQAgABBgACAAASABCIAKACAQAAQCBQABgAQBAQAMDAAGACxEAgABAdAxTAggECwASMyqDTAlAASCAlsqEEgGBBXCEIs8AggREwUAAAIABQEAADwWAhJICViQQBcQTQAAEAAAUQIECKQswBBUGaLQXgSdRkaYBg-YJklOgyAJgjIyTYhN-Ew8UhRCghyA2KWYAwAAAA.f_gAAAAAAAAA;addtl_consent=1~43.3.9.6.9.13.6.4.15.9.5.2.11.8.1.3.2.10.33.4.15.17.2.9.20.7.20.5.20.9.2.1.4.40.4.14.9.13.8.9.6.6.9.41.5.3.1.27.1.17.10.10.8.6.2.8.3.4.146.65.1.17.19.25.35.5.18.9.7.21.20.2.4.18.24.4.9.6.5.2.14.25.3.2.2.8.2.26.8.6.3.10.4.20.2.17.10.11.1.3.22.16.2.6.8.6.11.6.5.17.16.11.19.28.12.1.5.2.17.9.6.40.17.4.9.15.8.7.3.12.7.2.4.1.19.13.22.13.2.6.8.10.1.4.15.2.4.9.4.5.4.7.13.5.15.17.4.14.10.15.2.5.6.2.2.1.2.14.7.4.8.2.9.28.12.13.2.18.1.1.3.1.1.9.7.2.16.5.19.8.4.8.5.4.8.4.4.2.14.2.13.4.2.6.9.6.3.2.2.3.7.9.10.11.9.19.8.3.3.1.2.3.9.19.22.4.3.27.3.4.6.3.3.3.4.1.7.11.4.1.11.6.1.10.13.3.2.2.4.3.2.2.7.15.7.14.4.3.4.5.7.2.2.5.5.3.9.7.9.1.5.3.7.10.11.1.3.1.1.2.1.3.2.6.1.12.8.1.3.1.1.2.2.7.6.1.1.4.3.6.1.2.1.4.1.1.4.1.1.2.1.8.1.7.4.3.3.3.5.3.15.1.15.10.28.1.2.2.12.3.4.1.6.3.4.7.1.3.1.4.1.5.3.1.2.1.4.1.5.2.3.1.2.2.6.2.1.2.2.2.4.1.1.1.2.2.1.1.1.1.2.1.1.1.2.2.1.1.2.1.2.1.7.1.7.1.1.2.2.1.4.2.1.1.9.1.6.2.1.6.2.3.2.1.1.1.2.5.2.4.1.1.2.2.1.1.7.1.2.2.1.2.1.2.3.1.1.2.4.1.1.1.9.6.4.5.9.1.2.3.1.4.3.2.2.3.1.1.1.1.12.1.3.1.1.2.2.1.6.3.3.5.2.7.1.1.2.5.1.9.5.1.3.1.8.4.5.1.9.1.1.1.2.1.1.1.4.2.13.1.1.3.1.2.5.1.2.1.1.1.2.1.3.1.1.1.1.2.4.1.5.1.2.4.3.10.2.9.7.2.2.1.3.3.1.6.1.2.5.1.1.2.6.4.2.1.200.200.100.300.400.100.100.100.400.1700.304.596.100.1000.800.500.400.200.200.500.2101.99.303.99.104.95.1399.1100.100.4302.1798.2100.800.100.600.200.900.100.200.700.100.800.2900.1400.300.400.2200.2300.400.1101.499.400.2100.100.100.2100.1301.299.600.1100.101.99;IABGPP_HDR_GppString=DBABMA~CQZdq93QZdq93AKA9AHUCBFsAP_gAEPgAA6gLrNR_G__bWlr-bb3aftkeYxP9_hr7sQxBgbJk24FzLvW_JwXx2E5NAzatqIKmRIAu3TBIQNlHJDURVCgKIgVryDMaEyUoTNKJ6BkiFMRI2NYCFxvm4tjWQCY5vr99lc1mB-N7dr82dzyy6hHn3a5_2S1WJCdIYetDfv8ZBKT-9IEd_x8v4v4_F7pE2-eS1n_pGvp6j9-Yns_dBmxt-bSffzPn__rl_e7X_vf_n37v94XH77v____f_-7___wXXABMNCogjLIgQCBQMIIEACgrCACgQBAAAkDRAQAmDApyBgAusJkAIAUAAwQAgABBgACAAASABCIAKACAQAAQCBQABgAQBAQAMDAAGACxEAgABAdAxTAggECwASMyqDTAlAASCAlsqEEgGBBXCEIs8AggREwUAAAIABQEAADwWAhJICViQQBcQTQAAEAAAUQIECKQswBBUGaLQXgSdRkaYBg-YJklOgyAJgjIyTYhN-Ew8UhRCghyA2KWYAwAAAA.f_gAAAAAAAAA;__gfp_64b=vvdr6VyTJ.ESqfCoiFMXgS74OlQAkmXWaZnFSTE26.X.O7|1760707775|2|||8:2:32;_hjSessionUser_3690208=eyJpZCI6Ijg1ZjcyZDdjLTUzZjUtNWZiMS1hY2ZlLWNhNWYxMzFhY2JmZiIsImNyZWF0ZWQiOjE3NjA3MDc3NzE4NjgsImV4aXN0aW5nIjp0cnVlfQ==;_gcl_au=1.1.280498929.1760707894;ao-fpgad=%7B%22fpcRequired%22%3Afalse%2C%22checkTS%22%3A1760736928126%2C%22domain%22%3A%22ingatlanbazar.hu%22%7D;_gcl_aw=GCL.1760736929.CjwKCAjw0sfHBhB6EiwAQtv5qaddbUNxV8it38e5e3gPSWfTlhEQOTxeHgUj74KAZuZT3oY4nVkmDxoCr4MQAvD_BwE;_gcl_gs=2.1.k1$i1760736927$u207381835;_hjSession_3690208=eyJpZCI6IjFkZWViNTk2LTQ1ZTAtNGMwMC1hMjc0LTBjNWE5Y2QyMjI3MCIsImMiOjE3NjA3MzY5MjgyNzUsInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjAsImZzIjowLCJzcCI6MX0=;req_dt=Sat Oct 18 2025;__gads=ID=431b44cc45bb54cb:T=1760707775:RT=1760739664:S=ALNI_MY0s3JLyQ-ike4RNI8pH5PUCOeb5Q;__gpi=UID=000012a1cafaf093:T=1760707775:RT=1760739664:S=ALNI_Ma5X2dQCqYzPw_jA8qAHjHTt8Kb7w;__eoi=ID=220fb3b19403696c:T=1760707775:RT=1760739664:S=AA-AfjYh944FxH_72bpINtWrvL_9;cto_bundle=adaCiV9BVWh6RFhwd3luOWhmODF5Z0JGbjV2UiUyRmN2SkJLRzRScklxMFduOFRXV3RZYXBRdHl2JTJGZE4lMkJXNzRNT2NhbThlbzh3Z0dkdmE4cUs2ZFFwJTJCbDVwWnBKRUEyQnVmSXBDbjduNXJ6THIyYXdNRGcxOCUyRmRZJTJGaWxYSmJwMXhOOXZlag;recent_viewed_properties=a%3A23%3A%7Bi%3A0%3Bs%3A36%3A%22533445f8-a8a3-11f0-b6a6-005056b3506b%22%3Bi%3A1%3Bs%3A36%3A%2286e67ac8-9e53-11f0-b6a6-005056b3506b%22%3Bi%3A2%3Bs%3A36%3A%22221de2a8-a8e8-11f0-b6a6-005056b3506b%22%3Bi%3A3%3Bs%3A36%3A%22f5191557-892f-11f0-b6a6-005056b3506b%22%3Bi%3A4%3Bs%3A36%3A%223221b5d4-9921-11f0-b6a6-005056b3506b%22%3Bi%3A5%3Bs%3A36%3A%228afe926d-731b-11f0-b6a6-005056b3506b%22%3Bi%3A6%3Bs%3A36%3A%227384753f-a8d6-11f0-b6a6-005056b3506b%22%3Bi%3A7%3Bs%3A36%3A%22285e8d7b-a5b9-11f0-b6a6-005056b3506b%22%3Bi%3A8%3Bs%3A36%3A%222ad5b573-8934-11f0-b6a6-005056b3506b%22%3Bi%3A9%3Bs%3A36%3A%2278fb96ff-338d-11f0-b6a6-005056b3506b%22%3Bi%3A10%3Bs%3A36%3A%2208682721-81b2-11f0-b6a6-005056b3506b%22%3Bi%3A11%3Bs%3A36%3A%22cfe9c7a9-98e9-11f0-b6a6-005056b3506b%22%3Bi%3A12%3Bs%3A36%3A%22989167ac-9e53-11f0-b6a6-005056b3506b%22%3Bi%3A13%3Bs%3A36%3A%22d9f7a545-1fa9-11ef-be3d-005056b3506b%22%3Bi%3A14%3Bs%3A36%3A%22d55eb761-99e7-11f0-b6a6-005056b3506b%22%3Bi%3A15%3Bs%3A36%3A%2248932cbd-5c68-11f0-b6a6-005056b3506b%22%3Bi%3A16%3Bs%3A36%3A%220fafcda3-a0b0-11f0-b6a6-005056b3506b%22%3Bi%3A17%3Bs%3A36%3A%22720a4066-172f-11f0-b6a6-005056b3506b%22%3Bi%3A18%3Bs%3A36%3A%22b40063b9-9d33-11f0-b6a6-005056b3506b%22%3Bi%3A19%3Bs%3A36%3A%22956f80a6-8ab0-11f0-b6a6-005056b3506b%22%3Bi%3A20%3Bs%3A36%3A%223dfe2015-e988-11ee-be3d-005056b3506b%22%3Bi%3A21%3Bs%3A36%3A%2257512440-9845-11f0-b6a6-005056b3506b%22%3Bi%3A22%3Bs%3A36%3A%22ce27463a-69b2-11f0-b6a6-005056b3506b%22%3B%7D;_ga_0MJFB56G4D=GS2.1.s1760736928$o2$g1$t1760739921$j20$l0$h0;"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "id": "256ad9e6-e2a1-4f1b-b0ad-1823ebb2e86d",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        540,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "637873b4-513d-41c4-92cf-8ae09d6830e7",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        320,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const hits = items[0].json.hits || [];\n\nconst result = hits.map(hit => Number(hit.shortId));\n\nreturn [\n  {\n    json: {\n      result\n    }\n  }\n];"
+      },
+      "id": "84b154a0-b06d-429e-bad2-2fb961586b27",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "appartment",
+          "mode": "list",
+          "cachedResultName": "appartment"
+        },
+        "table": {
+          "__rl": true,
+          "value": "search",
+          "mode": "list",
+          "cachedResultName": "search"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "url",
+              "value": "=https://www.ingatlanbazar.hu/api/property-search"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "98f46f66-263b-48c1-963d-2fbeb830692d",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1080,
+        480
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "xiEGHmvBb78GwyNM",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "be8f4103-0a02-41e5-87d3-1070f7e2ab2b",
+              "leftValue": "={{ $json.result }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "48844a4b-c7ae-4772-ace9-2037ef4b1b0e",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1660,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "5217553853",
+        "text": "=Got new results🥳:\n\n{{ $('If1').item.json.result.map(item => `https://www.ingatlanbazar.hu/${item}`).join(\"\\n\")}}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "9bd56edb-dfef-4e5f-aedf-cf1f8ac20368",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2040,
+        120
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "hRlXhEakv5zz31tT",
+          "name": "Flat Searcher"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get arr1 from Node A\nconst arr1 = $node[\"Postgres\"].data.ids;\n\n// Get arr2 from Node B\nconst arr2 = $node[\"Code\"].data.result;\n\nconsole.log(\"Postgres\")\nconsole.log(arr1)\nconsole.log(\"Code\")\nconsole.log(arr2)\n\nconst result = arr2.filter(v => !arr1.includes(v));\n\nconsole.log(result)\n\nreturn [{ json: { result } }];"
+      },
+      "id": "513af2de-7d9a-4aae-adb2-258b6c3302fd",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1380,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "value": "appartment",
+          "mode": "list",
+          "cachedResultName": "appartment"
+        },
+        "table": {
+          "__rl": true,
+          "value": "search",
+          "mode": "list",
+          "cachedResultName": "search"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "url": "={{ $('Postgres').item.json.url }}",
+            "ids": "={{ $('Code').item.json.result }}"
+          },
+          "matchingColumns": [
+            "url"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ids",
+              "displayName": "ids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "array",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "79798431-54b0-4eef-8324-94dc2325d54a",
+      "name": "Postgres2",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1820,
+        160
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "xiEGHmvBb78GwyNM",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-18T15:45:45.000Z",
+  "versionId": "f7b9a6f0-f597-4429-8d0e-6f139ed39822"
+}
