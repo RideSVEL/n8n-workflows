@@ -125,9 +125,6 @@
     },
     {
       "parameters": {
-        "public": true,
-        "authentication": "n8nUserAuth",
-        "initialMessages": "Hi there! 👋\nMy name is Serejka Calendar. How can I assist you today?",
         "options": {}
       },
       "id": "719aaeb8-e985-4235-bcff-c2bfbc6a8e5c",
@@ -173,22 +170,6 @@
     },
     {
       "parameters": {
-        "content": "## Start here!\n@[youtube](-S5k4sXrPws)",
-        "height": 320,
-        "width": 464,
-        "color": 5
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        -928,
-        -32
-      ],
-      "typeVersion": 1,
-      "id": "d3552acd-20f1-40e0-af3c-e2aabdbf3f27",
-      "name": "Sticky Note"
-    },
-    {
-      "parameters": {
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
@@ -223,6 +204,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-18T21:07:18.000Z",
-  "versionId": "9a803ba9-10c2-4f7f-9abf-8c7728f2371e"
+  "updatedAt": "2025-12-03T13:59:21.000Z",
+  "versionId": "7cf6b1f2-58fc-4172-a887-f7a1df7cea49"
 }
