@@ -1,11 +1,22 @@
 {
   "active": false,
   "connections": {
-    "When clicking \"Execute Workflow\"": {
+    "When clicking ‘Execute workflow’": {
       "main": [
         [
           {
-            "node": "Code",
+            "node": "Get a calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a calendar": {
+      "main": [
+        [
+          {
+            "node": "Get many events",
             "type": "main",
             "index": 0
           }
@@ -13,45 +24,85 @@
       ]
     }
   },
-  "createdAt": "2024-01-26T16:35:35.643Z",
-  "id": "orcMUmqMqS4K9Puq",
+  "createdAt": "2025-12-18T20:22:39.035Z",
+  "id": "KUL1dmGL6QUqlnUh",
+  "isArchived": false,
   "meta": null,
   "name": "My workflow 2",
   "nodes": [
     {
       "parameters": {},
-      "id": "060088fe-0097-42f5-8528-05804c657b8a",
-      "name": "When clicking \"Execute Workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        720,
-        340
-      ]
+        0,
+        0
+      ],
+      "id": "919fa6d3-fad0-4e2c-ad31-f5875bbbf32e",
+      "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
-        "mode": "runOnceForEachItem",
-        "language": "python",
-        "pythonCode": "# Add a new field called 'myNewField' to the JSON of the item\n_input.item.json.myNewField = 1\nreturn _input.item"
+        "resource": "calendar",
+        "operation": "get",
+        "calendarId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
       },
-      "id": "fae9fa2a-a0d6-4954-a59a-e9fafcdffdf1",
-      "name": "Code",
-      "type": "n8n-nodes-base.code",
+      "type": "n8n-nodes-base.microsoftOutlook",
       "typeVersion": 2,
       "position": [
-        940,
-        340
-      ]
+        208,
+        0
+      ],
+      "id": "9357cc97-7515-4bb7-8197-9f1749723c4e",
+      "name": "Get a calendar",
+      "webhookId": "564ccbd4-cb3d-4048-ae5b-e7d67ea86693"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "e74cea30-b6fd-4976-8711-3327b2c3b9c6",
+      "name": "Get many events",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "jEeiURPpgfOHvFEh",
+          "name": "Google Calendar account"
+        }
+      }
     }
   ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "createdAt": "2025-12-18T20:22:39.039Z",
+      "updatedAt": "2025-12-18T20:22:39.039Z",
+      "role": "workflow:owner",
+      "workflowId": "KUL1dmGL6QUqlnUh",
+      "projectId": "1dpdX6PwTs6u06T1"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-01-26T16:35:35.643Z",
-  "versionId": "94881290-319d-4447-9027-35e277f62234"
+  "updatedAt": "2025-12-18T20:22:39.035Z",
+  "versionId": "9073c668-a6a7-4b2c-91ce-acc620971a1f"
 }
