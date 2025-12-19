@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Get many events",
+            "node": "Get availability in a calendar",
             "type": "main",
             "index": 0
           }
@@ -63,11 +63,12 @@
     },
     {
       "parameters": {
-        "operation": "getAll",
+        "resource": "calendar",
         "calendar": {
           "__rl": true,
+          "value": "serhii.vasylchenko@nixs.com",
           "mode": "list",
-          "value": ""
+          "cachedResultName": "serhii.vasylchenko@nixs.com"
         },
         "options": {}
       },
@@ -78,7 +79,7 @@
         0
       ],
       "id": "e74cea30-b6fd-4976-8711-3327b2c3b9c6",
-      "name": "Get many events",
+      "name": "Get availability in a calendar",
       "credentials": {
         "googleCalendarOAuth2Api": {
           "id": "jEeiURPpgfOHvFEh",
@@ -103,6 +104,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-18T20:22:39.035Z",
-  "versionId": "9073c668-a6a7-4b2c-91ce-acc620971a1f"
+  "updatedAt": "2025-12-19T14:55:09.000Z",
+  "versionId": "aba60894-6746-433f-8244-265d37d64563"
 }
